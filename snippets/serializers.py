@@ -14,7 +14,7 @@ class BlogListView(APIView):
 class BlogSerializer(serializers.ModelSerializer):
     class Meta:
         model = Blog
-        fields = ['id', 'username', 'title', 'content', 'created_at','author', 'wes']
+        fields = ['id', 'username', 'title', 'content', 'created_at','author']
 
 
 class UserSerializer(serializers.ModelSerializer):
