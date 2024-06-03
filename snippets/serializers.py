@@ -1,12 +1,20 @@
 from rest_framework import serializers
+from rest_framework.response import Response
+from rest_framework.views import APIView
 from snippets.models import Snippet, LANGUAGE_CHOICES, STYLE_CHOICES
 from django.contrib.auth.models import User
 from .models import Blog
 
+class BlogListView(APIView):
+    def get(self, request):
+        blogs = Blog.objects.all()
+        serializer = BlogSerializer(blogs, many=True)
+        return Response(serializer.data)
+    
 class BlogSerializer(serializers.ModelSerializer):
     class Meta:
         model = Blog
-        fields = ['id', 'username', 'title', 'content', 'created_at','author', 'ttt']
+        fields = ['id', 'username', 'title', 'content', 'created_at','author']
 
 
 class UserSerializer(serializers.ModelSerializer):
